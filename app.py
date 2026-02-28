@@ -2,8 +2,6 @@ import streamlit as st
 import pickle 
 import requests
 
-
-new_df = pickle.load(open('movies.pkl','rb'))
 similarity = pickle.load(open('similarity.pkl','rb')) 
 df = pickle.load(open('df.pkl','rb')) 
 
@@ -19,17 +17,17 @@ def fetch_poster(movie_name):
         return 'No' 
 
 def recommend(movie):
-    movie_index = new_df[new_df['title'] == movie].index[0]
+    movie_index = df[df['title'] == movie].index[0]
     distance = similarity[movie_index]
     movie_list = sorted(list(enumerate(distance)),key=lambda x:x[1],reverse=True)[1:11]
 
     recommended_movies = []
     recommended_movies_poster = []
     for i in movie_list:
-        recommended_movies.append(new_df.iloc[i[0]]['title'])
+        recommended_movies.append(df.iloc[i[0]]['title'])
 
         #fetch poster from api
-        poster = fetch_poster(new_df.iloc[i[0]]['title']) 
+        poster = fetch_poster(df.iloc[i[0]]['title']) 
         if poster != 'No':
             recommended_movies_poster.append(poster) 
         else:
@@ -41,7 +39,7 @@ st.title("Movies Recommendation System")
 
 selected_movie = st.selectbox(
     'Which movie do you like best?',
-     new_df['title']) 
+    df['title']) 
 
 if st.button("Recommend"):
     selected_movie_poster = fetch_poster(selected_movie)
