@@ -17,11 +17,11 @@ movies = pd.read_sql(query, engine)
 # print(type(movies['embedding'][0]))
 
 # Convert embeddings from list (or string) to np.array
-movies['embedding'] = movies['embedding'].apply(lambda x: np.array(x))
+movies['semantic_embedding'] = movies['semantic_embedding'].apply(lambda x: np.array(x))
 
 
 # Stack embeddings into a 2D array
-embeddings_matrix = np.stack(movies['embedding'].values)
+embeddings_matrix = np.stack(movies['semantic_embedding'].values)
 
 # Compute cosine similarity
 similarity_matrix = cosine_similarity(embeddings_matrix)
