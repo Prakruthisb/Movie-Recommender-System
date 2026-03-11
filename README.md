@@ -117,11 +117,11 @@ Possible enhancements for this system include:
 
 ## Example Output
 
-![Drop Down](D:/movie_recommender_system/images/dropdown.png)
+![Drop Down](images/dropdown.png)
 
-![Recommendation](D:/movie_recommender_system/images/recommendation.png)
+![Recommendation](images/recommendation.png)
 
-![PostgreSql Database](D:/movie_recommender_system/images/database.png)
+![PostgreSql Database](images/database.png)
 
 ## Project Motivation
 
