@@ -117,10 +117,13 @@ Possible enhancements for this system include:
 
 ## Example Output
 
+### Drop Down
 ![Drop Down](images/dropdown.png)
 
+### Recommendations
 ![Recommendation](images/recommendation.png)
 
+### PostgreSql Database
 ![PostgreSql Database](images/database.png)
 
 ## Project Motivation
