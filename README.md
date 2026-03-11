@@ -115,6 +115,14 @@ Possible enhancements for this system include:
 - Frontend movie recommendation interface
 - Cloud deployment of the pipeline
 
+## Example Output
+
+![Drop Down](D:/movie_recommender_system/images/dropdown.png)
+
+![Recommendation](D:/movie_recommender_system/images/recommendation.png)
+
+![PostgreSql Database](D:/movie_recommender_system/images/database.png)
+
 ## Project Motivation
 
 Most beginner recommendation projects use static datasets such as MovieLens. This project was designed to simulate a real-world machine learning data pipeline, where data is continuously fetched, processed, and updated automatically.
