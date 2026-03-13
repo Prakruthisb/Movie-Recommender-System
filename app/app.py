@@ -3,12 +3,14 @@ import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine
 from sklearn.metrics.pairwise import cosine_similarity
+import os
 
 # -----------------------------
 # Database Connection
 # -----------------------------
 engine = create_engine(
-    "postgresql+psycopg2://postgres:psql%402026@localhost/movie_recommender"
+    f"postgresql+psycopg2://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
+    f"@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
 )
 
 # -----------------------------
