@@ -7,7 +7,8 @@ import psycopg2
 from psycopg2.extras import execute_values
 import os
 
-API_KEY = "TMDB_API_KEY"
+API_KEY = os.getenv("TMDB_API_KEY")
+# API_KEY = "TMDB_API_KEY"
 
 base_url = "https://api.themoviedb.org/3/discover/movie"
 
