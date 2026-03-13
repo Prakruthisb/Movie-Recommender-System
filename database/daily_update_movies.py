@@ -5,8 +5,9 @@ import pickle
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import psycopg2
 from psycopg2.extras import execute_values
+import os
 
-API_KEY = "89e257699ba82af50858fc341569a96f"
+API_KEY = "TMDB_API_KEY"
 
 base_url = "https://api.themoviedb.org/3/discover/movie"
 
@@ -269,11 +270,11 @@ df = df.where(pd.notnull(df), None)
 
 # Connect to PostgreSQL
 conn = psycopg2.connect(
-    host="localhost",
-    database="movie_recommender",
-    user="postgres",
-    password="psql@2026",
-    port="5432"
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    port=os.getenv("DB_PORT")
 )
 
 cursor = conn.cursor()

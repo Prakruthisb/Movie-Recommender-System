@@ -1,3 +1,4 @@
 .venv
 database/movies.csv
 database/semantic_movies.csv
+.env

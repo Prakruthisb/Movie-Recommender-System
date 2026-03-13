@@ -1,6 +1,7 @@
 import pandas as pd #Used to read CSV files and work with tables
 import psycopg2 #Used to connect Python with PostgreSQL database
 import ast
+import os
 
 movies = pd.read_csv(r"D:\movie_recommender_system\database\movies.csv")
 
@@ -12,10 +13,11 @@ movies = movies.drop_duplicates(subset=['tmdb_id'], keep='first')
 
 # Connect to DB
 conn = psycopg2.connect(
-    host="localhost",
-    database="movie_recommender",
-    user="postgres",
-    password="psql@2026"
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    port=os.getenv("DB_PORT")
 )
 
 cur = conn.cursor() #A pen to write SQL commands. Without cursor → we cannot execute queries.

@@ -7,7 +7,7 @@ from sqlalchemy import create_engine, text
 # ----------------------------
 # Config
 # ----------------------------
-API_KEY = "89e257699ba82af50858fc341569a96f"
+API_KEY = "TMDB_API_KEY"
 TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500"  # TMDB poster URL base
 MAX_WORKERS = 20      # parallel threads
 BATCH_SIZE = 19000    # fetch half of movies at a time
