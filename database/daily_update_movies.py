@@ -117,7 +117,7 @@ df = pd.DataFrame(all_movies)
 
 
 # df = pickle.load(open(r"D:\movie_recommender_system\database\df1.pkl",'rb'))
-genre_map = pickle.load(open(r'D:\movie_recommender_system\database\genre_map.pkl','rb'))
+genre_map = pickle.load(open('database/genre_map.pkl','rb'))
 
 # # print(df.info())
 # # print(df.head())
