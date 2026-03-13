@@ -93,32 +93,32 @@ df = pd.DataFrame(all_movies)
 # pickle.dump(df, open(r'D:\movie_recommender_system\database\df1.pkl','wb'))
 
 # Fetch Genre Mapping
-# url = "https://api.themoviedb.org/3/genre/movie/list"
-# params = {"api_key": API_KEY}
+url = "https://api.themoviedb.org/3/genre/movie/list"
+params = {"api_key": API_KEY}
 
-# for attempt in range(max_retries):
-#     try:
-#         response = requests.get(url, params=params, timeout=10)
+for attempt in range(max_retries):
+    try:
+        response = requests.get(url, params=params, timeout=10)
 
-#         if response.status_code == 200:
-#             genres = response.json()["genres"]
-#             break
+        if response.status_code == 200:
+            genres = response.json()["genres"]
+            break
 
-#     except Exception:
-#         print("Retrying genre request...", attempt+1)
-#         time.sleep(1)
+    except Exception:
+        print("Retrying genre request...", attempt+1)
+        time.sleep(1)
 
-# else:
-#     raise Exception("Failed to fetch genres after retries")
+else:
+    raise Exception("Failed to fetch genres after retries")
 
-# genre_map = {g["id"]: g["name"] for g in genres}
+genre_map = {g["id"]: g["name"] for g in genres}
 
 # pickle.dump(genre_map,open(r"D:\movie_recommender_system\database\genre_map.pkl","wb"))
 
 
 
 # df = pickle.load(open(r"D:\movie_recommender_system\database\df1.pkl",'rb'))
-genre_map = pickle.load(open('database/genre_map.pkl','rb'))
+# genre_map = pickle.load(open('database/genre_map.pkl','rb'))
 
 # # print(df.info())
 # # print(df.head())
