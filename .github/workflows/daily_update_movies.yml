@@ -24,4 +24,4 @@ jobs:
 
       - name: Run update script
         run: |
-          python database\daily_update_movies.py
+          python database/daily_update_movies.py
