@@ -2,3 +2,7 @@
 database/movies.csv
 database/semantic_movies.csv
 .env
+database/adding_semantic_embeddings.py
+database/fetch_poster_for_existing_movies.py
+database/insert_movies.py
+database/update_movies.py
