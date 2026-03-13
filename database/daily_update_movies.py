@@ -162,7 +162,11 @@ def fetch_movie_details(movie_id):
     for attempt in range(10):   # retry 10 times
         try:
             response = requests.get(url, params=params, timeout=30)
-            data = response.json()
+            if response.status_code == 200:
+                data = response.json()
+            else:
+                print("API error:", response.status_code)
+                return None
 
             cast = [c["name"] for c in data.get("credits", {}).get("cast", [])[:5]]
 
