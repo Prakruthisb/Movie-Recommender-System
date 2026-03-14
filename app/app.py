@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sklearn.metrics.pairwise import cosine_similarity
 import os
 
+st.write("DB_HOST:", os.getenv("DB_HOST"))
 # -----------------------------
 # Database Connection
 # -----------------------------
@@ -37,10 +38,19 @@ def load_movies():
     return df
 
 
-movies = load_movies()
+# movies = load_movies()
 
-# Stack embeddings into matrix
-embeddings_matrix = np.stack(movies['semantic_embedding'].values)
+# # Stack embeddings into matrix
+# embeddings_matrix = np.stack(movies['semantic_embedding'].values)
+
+try:
+    movies = load_movies()
+    embeddings_matrix = np.stack(movies['semantic_embedding'].values)
+
+except Exception as e:
+    st.error("Database connection failed")
+    st.error(e)
+    st.stop()
 
 
 # -----------------------------
