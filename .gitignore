@@ -13,3 +13,4 @@ database/semantic_movies.csv
 database_migration/migration.py
 models/df.pkl
 models/similarity.pkl
+.env
