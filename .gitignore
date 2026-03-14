@@ -1,7 +1,7 @@
-.venv
-database/movies.csv
-database/semantic_movies.csv
-.env
+*.pkl
+*.csv
+*.ipynb
+data/
 database/adding_semantic_embeddings.py
 database/fetch_poster_for_existing_movies.py
 database/insert_movies.py
