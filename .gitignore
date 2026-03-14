@@ -14,3 +14,5 @@ database_migration/migration.py
 models/df.pkl
 models/similarity.pkl
 .env
+.gitattributes
+.ipynb_checkpoints
