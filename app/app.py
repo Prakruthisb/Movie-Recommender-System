@@ -4,8 +4,13 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sklearn.metrics.pairwise import cosine_similarity
 import os
+from dotenv import load_dotenv
 
-st.write("DB_HOST:", os.getenv("DB_HOST"))
+# Load .env file
+load_dotenv()
+
+
+st.write("database url:", os.getenv("DATABASE_URL"))
 # -----------------------------
 # Database Connection
 # -----------------------------
@@ -27,30 +32,39 @@ engine = create_engine(
 # -----------------------------
 # Load Movies (Cached)
 # -----------------------------
+def normalize_embedding(emb):
+    if isinstance(emb, str):
+        return np.array([float(x) for x in emb.strip("{}").split(",")], dtype=np.float32)
+    elif isinstance(emb, (list, np.ndarray)):
+        return np.array(emb, dtype=np.float32)
+    else:
+        raise ValueError(f"Unknown embedding type: {type(emb)}")
+
 @st.cache_data
 def load_movies():
     query = "SELECT * FROM public.movies;"
     df = pd.read_sql(query, engine)
 
     # Convert embeddings to numpy arrays
-    df['semantic_embedding'] = df['semantic_embedding'].apply(lambda x: np.array(x))
+    # df['semantic_embedding'] = df['semantic_embedding'].apply(lambda x: np.array(x))
+    df['semantic_embedding'] = df['semantic_embedding'].apply(normalize_embedding)
 
     return df
 
 
-# movies = load_movies()
+movies = load_movies()
 
-# # Stack embeddings into matrix
-# embeddings_matrix = np.stack(movies['semantic_embedding'].values)
+# Stack embeddings into matrix
+embeddings_matrix = np.stack(movies['semantic_embedding'].values)
 
-try:
-    movies = load_movies()
-    embeddings_matrix = np.stack(movies['semantic_embedding'].values)
+# try:
+#     movies = load_movies()
+#     embeddings_matrix = np.stack(movies['semantic_embedding'].values)
 
-except Exception as e:
-    st.error("Database connection failed")
-    st.error(e)
-    st.stop()
+# except Exception as e:
+#     st.error("Database connection failed")
+#     st.error(e)
+#     st.stop()
 
 
 # -----------------------------
