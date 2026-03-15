@@ -1,5 +1,8 @@
 # Real-Time Movie Recommender System 🎬
 
+## Live Demo 
+https://psb-movie-recommendation-engine.streamlit.app/
+
 ## Project Overview
 
 This project builds a production-style movie recommender system that automatically fetches newly released movies, processes their metadata, generates semantic embeddings, and stores them in a database for intelligent movie recommendations.
