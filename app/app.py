@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-st.write("database url:", os.getenv("DATABASE_URL"))
+# st.write("database url:", os.getenv("DATABASE_URL"))
 # -----------------------------
 # Database Connection
 # -----------------------------
