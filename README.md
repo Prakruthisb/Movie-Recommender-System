@@ -78,7 +78,7 @@ These embeddings allow the system to capture contextual relationships between mo
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/movie-recommender-system.git
+git clone https://github.com/Prakruthisb/Movie-Recommender-System.git
 ```
 
 ### Navigate to the project folder
