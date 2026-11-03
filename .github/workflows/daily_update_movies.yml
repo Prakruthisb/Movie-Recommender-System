@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements_pipeline.txt
 
+      - name: Run tests
+        run: python -m pytest -v
+
       - name: Run update script
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}

@@ -1,3 +1,4 @@
+from pipeline_utils import build_poster_url, map_genres, squash_names, build_tags
 import requests
 import pandas as pd
 import time
@@ -68,7 +69,7 @@ for lang_name, (lang_code, total_pages) in languages.items():
 
             poster_url = None
             if poster_path:
-                poster_url = f"https://image.tmdb.org/t/p/w500{poster_path}"
+                poster_url = build_poster_url(movie.get("poster_path")) 
 
             movie_data = {
                 "movie_id": movie.get("id"),
@@ -129,7 +130,7 @@ df["genres"] = df["genre_ids"].apply(
     lambda ids: [genre_map.get(i) for i in ids if i in genre_map] if isinstance(ids,list) else []
 )
 
-df["genres"] = df["genres"].apply(lambda x: " ".join(x))
+df["genres"] = df["genre_ids"].apply(lambda ids: map_genres(ids, genre_map))
 
 df.drop("genre_ids", axis=1, inplace=True)
 
@@ -230,25 +231,12 @@ df = pd.merge(df,extra_df, on="movie_id",how="left")
 # df = pickle.load(open(r"D:\movie_recommender_system\database\df1.pkl",'rb'))
 # # print(df['cast'])
 
-df['cast'] = df['cast'].apply(lambda x:[s.replace(" ","") for s in x])
-df['cast'] = df['cast'].apply(lambda x:" ".join(x))
-
-df['director'] = df['director'].apply(lambda x:[s.replace(" ","") for s in x])
-df['director'] = df['director'].apply(lambda x:" ".join(x))
-
-df['keywords'] = df['keywords'].apply(lambda x:[s.replace(" ","") for s in x])
-df['keywords'] = df['keywords'].apply(lambda x:" ".join(x))
+for col in ["cast", "director", "keywords"]:   
+    df[col] = df[col].apply(squash_names)
 
 # Create the Tags Column
-df["tags"] = (
-    df["genres"].astype(str) + " " +
-    df["cast"].astype(str) + " " +
-    df["director"].astype(str) + " " +
-    df["keywords"].astype(str) + " " +
-    df["overview"].astype(str)
-)
-
-df['tags'] = df['tags'].str.lower()
+df["tags"] = df.apply(
+    lambda r: build_tags(r["genres"], r["cast"], r["director"], r["keywords"], r["overview"]), axis=1)
 
 #creating semantic embeddings 
 from sentence_transformers import SentenceTransformer
