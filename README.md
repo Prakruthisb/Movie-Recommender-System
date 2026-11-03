@@ -44,7 +44,8 @@ Unlike basic recommendation projects that use static datasets, this project simu
 
 - TMDB API
 - Multithreading (ThreadPoolExecutor)
-- Scheduled automation
+- GitHub Actions
+- Scheduled and manual workflow execution
 
 ## System Architecture
 
@@ -83,19 +84,39 @@ git clone https://github.com/Prakruthisb/Movie-Recommender-System.git
 
 ### Navigate to the project folder
 ```bash
-cd movie-recommender-system
+cd Movie-Recommender-System
 ```
 
-### cd movie-recommender-system
+### Install dependencies for the Streamlit application
 ```bash 
 pip install -r requirements.txt
 ```
 
-## Running the Data Pipeline
+## Running the Application
+```bash
+streamlit run app.py
+```
+
+## Running the Data Pipeline Locally
+
+- Before running the pipeline, configure the required environment variables for the TMDB API and PostgreSQL database connection.
+
+- Install the pipeline dependencies:
+
+```bash
+pip install -r requirements_pipeline.txt 
+```
+
+- Run the movie data update script:
 
 ```bash 
-python daily_movie_pipeline.py
+python database/daily_update_movies.py
 ```
+
+### Dependencies
+
+- `requirements.txt`: Dependencies for running the Streamlit application.
+- `requirements_pipeline.txt`: Dependencies for running the movie data pipeline and GitHub Actions workflow.
 
 ## Automation
 
@@ -134,7 +155,7 @@ Possible enhancements for this system include:
 ![Recommendation](images/recommendation.png)
 
 ### PostgreSql Database
-![PostgreSql Database](images/database.png)
+![PostgreSQL Database](images/database.png)
 
 ## Project Motivation
 
