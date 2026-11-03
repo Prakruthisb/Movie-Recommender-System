@@ -23,6 +23,8 @@ Unlike basic recommendation projects that use static datasets, this project simu
 - Prevents duplicate movie insertion using conflict handling
 - Uses multithreading for faster API data collection
 - Uses bulk database insertion for high performance
+- Automated testing using pytest
+- Validates the data pipeline before database updates
 
 ## Tech Stack
 
@@ -45,6 +47,7 @@ Unlike basic recommendation projects that use static datasets, this project simu
 - TMDB API
 - Multithreading (ThreadPoolExecutor)
 - GitHub Actions
+- pytest (Automated Testing)
 - Scheduled and manual workflow execution
 
 ## System Architecture
@@ -125,9 +128,19 @@ The data pipeline is automated using GitHub Actions.
 - Runs daily at 2:00 AM UTC (7:30 AM IST) to fetch and process newly released movies.
 - Can also be triggered manually using workflow_dispatch.
 - Uses GitHub Actions Secrets to securely access TMDB and PostgreSQL credentials.
-- Automatically runs the movie data update script and updates the PostgreSQL database.
+- Automatically installs pipeline dependencies and runs automated tests using pytest.
+- Executes the movie update script only if all tests pass.
+- Automatically updates the PostgreSQL database with newly processed movie data.
 
-This ensures the recommendation dataset stays up to date without requiring manual execution.
+## Continuous Integration
+
+The GitHub Actions workflow includes an automated testing step to validate the data pipeline before execution.
+
+- Uses pytest to discover and execute automated tests.
+- Stops the workflow if any test fails.
+- Prevents the daily movie update script from running when tests fail.
+
+This ensures the recommendation dataset stays up to date while improving the reliability of the automated data pipeline.
 
 ## Example Use Case
 
