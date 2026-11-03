@@ -99,7 +99,14 @@ python daily_movie_pipeline.py
 
 ## Automation
 
-The data pipeline is scheduled to run automatically every day using Windows Task Scheduler, ensuring the recommendation dataset stays updated with new movie releases.
+The data pipeline is automated using GitHub Actions.
+
+- Runs daily at 2:00 AM UTC (7:30 AM IST) to fetch and process newly released movies.
+- Can also be triggered manually using workflow_dispatch.
+- Uses GitHub Actions Secrets to securely access TMDB and PostgreSQL credentials.
+- Automatically runs the movie data update script and updates the PostgreSQL database.
+
+This ensures the recommendation dataset stays up to date without requiring manual execution.
 
 ## Example Use Case
 
